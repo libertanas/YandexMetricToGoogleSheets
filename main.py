@@ -12,7 +12,12 @@ if __name__ == "__main__":
     token = os.getenv("TOKEN")
     counter_id = os.getenv("COUNTER_ID")
     api_host_url = "https://api-metrika.yandex.ru"
-
+    
+    FILTER_BRANCHES = [
+    "https://i.transport.ru/perekrytiya/",
+    "https://i.transport.ru/spasibo/"
+    ]
+    
     start_date = os.getenv("START_DATE")
     if not start_date:
     start_date = (date.today() - relativedelta(weeks=2)).strftime("%Y-%m-%d")
