@@ -72,7 +72,7 @@ def download_query(host, counter_id, token, request_id, part_list):
     return pd.concat(tmp_df_list)
 
 
-def get_log_data(host, counter_id, token, source, start_date, end_date, api_field_list):
+def get_log_data(host, counter_id, token, source, start_date, end_date, api_field_list, filter_branches=None):
     request_id = create_query(host, counter_id, token, source, start_date, end_date, api_field_list)
     part_list = wait_query(host, counter_id, token, request_id)
     return download_query(host, counter_id, token, request_id, part_list)
