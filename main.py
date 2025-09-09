@@ -14,8 +14,8 @@ if __name__ == "__main__":
     api_host_url = "https://api-metrika.yandex.ru"
     
     FILTER_BRANCHES = [
-    "https://i.transport.ru/perekrytiya/",
-    "https://i.transport.ru/spasibo/"
+    "https://i.transport.mos.ru/perekrytiya/",
+    "https://i.transport.mos.ru/spasibo/"
     ]
     
     start_date = os.getenv("START_DATE")
