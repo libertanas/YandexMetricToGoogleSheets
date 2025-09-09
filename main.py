@@ -14,6 +14,8 @@ if __name__ == "__main__":
     api_host_url = "https://api-metrika.yandex.ru"
 
     start_date = os.getenv("START_DATE")
+    if not start_date:
+    start_date = (date.today() - relativedelta(weeks=2)).strftime("%Y-%m-%d")
     yesterday = (date.today() - relativedelta(days=1)).strftime("%Y-%m-%d")
     end_date = os.getenv("END_DATE", default=yesterday)
 
