@@ -7,17 +7,23 @@ from time import sleep
 from io import StringIO
 
 
-def create_query(host, counter_id, token, source, start_date, end_date, api_field_list):
+def create_query(host, counter_id, token, source, start_date, end_date, api_field_list, filter_branches=None):
     header_dict = {
         "Authorization": f"OAuth {token}",
         "Content-Type": "application/x-yametrika+json"
     }
+    
     url_params = urlencode([
         ("date1", start_date),
         ("date2", end_date),
         ("source", source),
         ("fields", ",".join(sorted(api_field_list, key=lambda s: s.lower())))
     ])
+    
+    if filter_branches:
+        filters = " OR ".join([f"URL STARTSWITH '{branch}'" for branch in filter_branches])
+        url_params.append(("filters", filters))
+    
     url = f"{host}/management/v1/counter/{counter_id}/logrequests?{url_params}"
 
     r = post(url, headers=header_dict)
