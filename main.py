@@ -42,7 +42,8 @@ if __name__ == "__main__":
                             data_elem["source"],
                             start_date,
                             end_date,
-                            data_elem["api_field_list"])
+                            data_elem["api_field_list"],
+                            FILTER_BRANCHES)
 
         sh = gc.open_by_url(data_elem["google_sheet_url"])
         sh.sheet1.update([data.columns.values.tolist()]
