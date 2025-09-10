@@ -9,9 +9,12 @@ from api_fields import hit_field_list, visit_field_list
 
 
 if __name__ == "__main__":
+    
     token = os.getenv("TOKEN")
     counter_id = os.getenv("COUNTER_ID")
     api_host_url = "https://api-metrika.yandex.ru"
+
+    MAX_ROWS = 200_000
     
     FILTER_BRANCHES = [
     "https://i.transport.mos.ru/perekrytiya/",
@@ -45,7 +48,10 @@ if __name__ == "__main__":
                             end_date,
                             data_elem["api_field_list"],
                             FILTER_BRANCHES)
-
+        
+        if len(data) > MAX_ROWS:
+        data = data.tail(MAX_ROWS)
+        
         sh = gc.open_by_url(data_elem["google_sheet_url"])
         sh.sheet1.update([data.columns.values.tolist()]
                          + data.fillna("Unknown").values.tolist())
