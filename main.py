@@ -50,7 +50,7 @@ if __name__ == "__main__":
                             FILTER_BRANCHES)
         
         if len(data) > MAX_ROWS:
-        data = data.tail(MAX_ROWS)
+            data = data.tail(MAX_ROWS)
         
         sh = gc.open_by_url(data_elem["google_sheet_url"])
         sh.sheet1.update([data.columns.values.tolist()]
