@@ -12,19 +12,19 @@ def create_query(host, counter_id, token, source, start_date, end_date, api_fiel
         "Authorization": f"OAuth {token}",
         "Content-Type": "application/x-yametrika+json"
     }
-    
-    url_params = urlencode([
+
+    url_params = [
         ("date1", start_date),
         ("date2", end_date),
         ("source", source),
         ("fields", ",".join(sorted(api_field_list, key=lambda s: s.lower())))
-    ])
-    
+    ]
+
     if filter_branches:
         filters = " OR ".join([f"URL STARTSWITH '{branch}'" for branch in filter_branches])
         url_params.append(("filters", filters))
-    
-    url = f"{host}/management/v1/counter/{counter_id}/logrequests?{url_params}"
+
+    url = f"{host}/management/v1/counter/{counter_id}/logrequests?{urlencode(url_params)}"
 
     r = post(url, headers=header_dict)
     assert r.status_code == 200, f"Запрос не создан, {r.text}"
