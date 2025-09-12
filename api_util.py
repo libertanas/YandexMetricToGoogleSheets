@@ -20,10 +20,19 @@ def create_query(host, counter_id, token, source, start_date, end_date, api_fiel
     ]
 
     if filter_branches:
-        filters = " OR ".join([f"ym:pv:URL STARTSWITH '{branch}'" for branch in filter_branches])
+        if source == "hits":
+            url_field = "ym:pv:URL"
+        elif source == "visits":
+            url_field = "ym:s:URL"
+        else:
+            url_field = "ym:pv:URL"  # дефолт на всякий случай
+
+        filters = " OR ".join([f'{url_field} STARTSWITH "{branch}"' for branch in filter_branches])
         url_params.append(("filters", filters))
 
     url = f"{host}/management/v1/counter/{counter_id}/logrequests?{urlencode(url_params)}"
+
+    print("Final request URL:", url)  # для отладки, потом можно убрать
 
     r = post(url, headers=header_dict)
     assert r.status_code == 200, f"Запрос не создан, {r.text}"
