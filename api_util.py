@@ -6,7 +6,6 @@ from json import loads, dumps
 from time import sleep
 from io import StringIO
 
-
 def create_query(host, counter_id, token, source, start_date, end_date, api_field_list, filter_branches=None):
     header_dict = {
         "Authorization": f"OAuth {token}",
@@ -30,7 +29,6 @@ def create_query(host, counter_id, token, source, start_date, end_date, api_fiel
     assert r.status_code == 200, f"Запрос не создан, {r.text}"
 
     return loads(r.text)["log_request"]["request_id"]
-
 
 def wait_query(host, counter_id, token, request_id):
     header_dict = {
