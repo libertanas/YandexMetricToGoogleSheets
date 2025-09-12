@@ -9,7 +9,8 @@ hit_field_list = [
     "ym:pv:lastTrafficSource",
     "ym:pv:goalsID",
     "ym:pv:parsedParamsKey1",
-    "ym:pv:parsedParamsKey2"
+    "ym:pv:parsedParamsKey2",
+     ym:pv:lastReferer
 ]
 
 visit_field_list = [
