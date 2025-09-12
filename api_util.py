@@ -20,7 +20,7 @@ def create_query(host, counter_id, token, source, start_date, end_date, api_fiel
     ]
 
     if filter_branches:
-        filters = " OR ".join([f"URL STARTSWITH '{branch}'" for branch in filter_branches])
+        filters = " OR ".join([f"ym:pv:URL STARTSWITH '{branch}'" for branch in filter_branches])
         url_params.append(("filters", filters))
 
     url = f"{host}/management/v1/counter/{counter_id}/logrequests?{urlencode(url_params)}"
@@ -71,6 +71,6 @@ def download_query(host, counter_id, token, request_id, part_list):
 
 
 def get_log_data(host, counter_id, token, source, start_date, end_date, api_field_list, filter_branches=None):
-    request_id = create_query(host, counter_id, token, source, start_date, end_date, api_field_list)
+    request_id = create_query(host, counter_id, token, source, start_date, end_date, api_field_list, filter_branches)
     part_list = wait_query(host, counter_id, token, request_id)
     return download_query(host, counter_id, token, request_id, part_list)
