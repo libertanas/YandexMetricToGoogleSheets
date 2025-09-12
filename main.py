@@ -53,5 +53,9 @@ if __name__ == "__main__":
             data = data.tail(MAX_ROWS)
         
         sh = gc.open_by_url(data_elem["google_sheet_url"])
-        sh.sheet1.update([data.columns.values.tolist()]
-                         + data.fillna("Unknown").values.tolist())
+        worksheet = sh.worksheet("hits") if data_elem["source"] == "hits" else sh.worksheet("visits")
+        
+        worksheet.update(
+            [data.columns.values.tolist()] + data.fillna("Unknown").values.tolist()
+        )
+        
