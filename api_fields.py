@@ -10,7 +10,7 @@ hit_field_list = [
     "ym:pv:goalsID",
     "ym:pv:parsedParamsKey1",
     "ym:pv:parsedParamsKey2",
-    "ym:pv:Referer"
+    "ym:pv:referer"
 ]
 
 visit_field_list = [
