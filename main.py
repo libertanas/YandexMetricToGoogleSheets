@@ -46,8 +46,7 @@ if __name__ == "__main__":
                             data_elem["source"],
                             start_date,
                             end_date,
-                            data_elem["api_field_list"],
-                            FILTER_BRANCHES)
+                            data_elem["api_field_list"])
         
         if len(data) > MAX_ROWS:
             data = data.tail(MAX_ROWS)
