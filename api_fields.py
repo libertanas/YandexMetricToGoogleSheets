@@ -9,7 +9,8 @@ hit_field_list = [
     "ym:pv:referer",
     "ym:pv:title",
     "ym:pv:from",
-    "ym:pv:regionCity"
+    "ym:pv:regionCity",
+    "ym:pv:isPageView"
 ]
 
 visit_field_list = [
