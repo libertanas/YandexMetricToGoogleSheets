@@ -9,7 +9,6 @@ hit_field_list = [
     "ym:pv:referer",
     "ym:pv:title",
     "ym:pv:from",
-    "ym:pv:lastTrafficSource",
     "ym:pv:regionCity"
 ]
 
