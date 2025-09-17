@@ -23,7 +23,7 @@ if __name__ == "__main__":
     
     start_date = os.getenv("START_DATE")
     if not start_date:
-        start_date = date(date.today().year, 1, 1).strftime("%Y-%m-%d")
+        start_date = (date.today() - relativedelta(days=2)).strftime("%Y-%m-%d")
    
     yesterday = (date.today() - relativedelta(days=1)).strftime("%Y-%m-%d")
     end_date = os.getenv("END_DATE", default=yesterday)
@@ -51,8 +51,8 @@ if __name__ == "__main__":
         if data_elem["source"] == "hits":
             data = data[data["ym:pv:URL"].str.contains("/perekrytiya|/spasibo/", na=False)]
             #data3 = data2.groupby(['ym:s:date', 'ym:s:browser'])['ym:s:clientID'].count()
-        #elif data_elem["source"] == "visits":
-        #    data = data[data["ym:s:startURL"].str.contains("/perekrytiya|/spasibo/", na=False)]
+        elif data_elem["source"] == "visits":
+            data = data[data["ym:s:startURL"].str.contains("/perekrytiya|/spasibo/", na=False)]
 
         if len(data) > MAX_ROWS:
             data = data.tail(MAX_ROWS)
