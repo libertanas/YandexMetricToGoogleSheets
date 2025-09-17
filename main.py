@@ -51,14 +51,14 @@ if __name__ == "__main__":
         if data_elem["source"] == "hits":
             data = data[data["ym:pv:URL"].str.contains("/perekrytiya|/spasibo/", na=False)]
             #data3 = data2.groupby(['ym:s:date', 'ym:s:browser'])['ym:s:clientID'].count()
-        elif data_elem["source"] == "visits":
-            data = data[data["ym:s:startURL"].str.contains("/perekrytiya|/spasibo/", na=False)]
+        #elif data_elem["source"] == "visits":
+        #    data = data[data["ym:s:startURL"].str.contains("/perekrytiya|/spasibo/", na=False)]
 
         if len(data) > MAX_ROWS:
             data = data.tail(MAX_ROWS)
     
         sh = gc.open_by_url(data_elem["google_sheet_url"])
-        worksheet = sh.worksheet("hits") if data_elem["source"] == "hits" else sh.worksheet("visits")
+        worksheet = sh.worksheet("hits") if data_elem["source"] == "hits" #else sh.worksheet("visits")
         
         worksheet.update(
             [data.columns.values.tolist()] + data.fillna("Unknown").values.tolist()
