@@ -32,11 +32,12 @@ if __name__ == "__main__":
         "source": "hits",
         "api_field_list": hit_field_list,
         "google_sheet_url": os.getenv("HIT_SHEET_URL")
-    }, {
-        "source": "visits",
-        "api_field_list": visit_field_list,
-        "google_sheet_url": os.getenv("VISIT_SHEET_URL")
-    }]
+    }#, {
+     #   "source": "visits",
+     #   "api_field_list": visit_field_list,
+     #   "google_sheet_url": os.getenv("VISIT_SHEET_URL")
+    #}
+     ]
     gc = service_account()
 
     for data_elem in data_list:
@@ -49,16 +50,17 @@ if __name__ == "__main__":
                             data_elem["api_field_list"])
         
         if data_elem["source"] == "hits":
-            data = data[data["ym:pv:URL"].str.contains("/perekrytiya|/spasibo/", na=False)]
+            data = data[(data["ym:pv:URL"].str.contains("/perekrytiya|/spasibo/", na=False)) & 
+                (data["ym:pv:URL"].str.contains("1", na=False)]
             #data3 = data2.groupby(['ym:s:date', 'ym:s:browser'])['ym:s:clientID'].count()
-        elif data_elem["source"] == "visits":
-            data = data[data["ym:s:startURL"].str.contains("/perekrytiya|/spasibo/", na=False)]
+        #elif data_elem["source"] == "visits":
+        #    data = data[data["ym:s:startURL"].str.contains("/perekrytiya|/spasibo/", na=False)]
 
         if len(data) > MAX_ROWS:
             data = data.tail(MAX_ROWS)
     
         sh = gc.open_by_url(data_elem["google_sheet_url"])
-        worksheet = sh.worksheet("hits") #if data_elem["source"] == "hits" else sh.worksheet("visits")
+        worksheet = sh.worksheet("hits") #if data_elem["source"] == "hits" #else sh.worksheet("visits")
         
         worksheet.update(
             [data.columns.values.tolist()] + data.fillna("Unknown").values.tolist()
