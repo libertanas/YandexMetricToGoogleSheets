@@ -50,8 +50,10 @@ if __name__ == "__main__":
                             data_elem["api_field_list"])
         
         if data_elem["source"] == "hits":
-            data = data[(data["ym:pv:URL"].str.contains("/perekrytiya|/spasibo/", na=False)) & 
-                (data["ym:pv:URL"].str.contains("1", na=False)]
+                data = data[
+                    data["ym:pv:URL"].str.contains("/perekrytiya|/spasibo/", na=False)
+                    & (data["ym:pv:isPageView"] == "1")
+                ]
             #data3 = data2.groupby(['ym:s:date', 'ym:s:browser'])['ym:s:clientID'].count()
         #elif data_elem["source"] == "visits":
         #    data = data[data["ym:s:startURL"].str.contains("/perekrytiya|/spasibo/", na=False)]
