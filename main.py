@@ -14,7 +14,7 @@ if __name__ == "__main__":
     counter_id = os.getenv("COUNTER_ID")
     api_host_url = "https://api-metrika.yandex.ru"
 
-    MAX_ROWS = 200_000
+    MAX_ROWS = 900_000
     
     FILTER_BRANCHES = [
     "https://i.transport.mos.ru/perekrytiya/",
