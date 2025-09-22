@@ -17,7 +17,7 @@ if __name__ == "__main__":
     MAX_ROWS = 200_000
     
     FILTER_BRANCHES = [
-    "https://i.transport.mos.ru/perekrytiya/",
+    #"https://i.transport.mos.ru/perekrytiya/",
     "https://i.transport.mos.ru/spasibo/"
     ]
     
@@ -51,7 +51,8 @@ if __name__ == "__main__":
         
         if data_elem["source"] == "hits":
             data = data[
-                data["ym:pv:URL"].str.contains("/perekrytiya|/spasibo/|/sms", na=False)
+                #data["ym:pv:URL"].str.contains("/perekrytiya|/spasibo/|/sms", na=False)
+                data["ym:pv:URL"].str.contains("/spasibo/", na=False)
                 & (data["ym:pv:isPageView"] == 1)
             ]
             #data3 = data2.groupby(['ym:s:date', 'ym:s:browser'])['ym:s:clientID'].count()
