@@ -21,15 +21,16 @@ if __name__ == "__main__":
     "https://i.transport.mos.ru/spasibo/"
     ]
     
-    start_date = os.getenv("START_DATE")
-    if not start_date:
-        start_date = (date.today() - relativedelta(days=2)).strftime("%Y-%m-%d")
+    #start_date = os.getenv("START_DATE")
+    #if not start_date:
+    #    start_date = (date.today() - relativedelta(days=2)).strftime("%Y-%m-%d")
    
-    end_date = os.getenv("END_DATE")
-    if not end_date:
-        yesterday = (date.today() - relativedelta(days=1)).strftime("%Y-%m-%d")
-        end_date = yesterday
-    
+    #end_date = os.getenv("END_DATE")
+    #if not end_date:
+    #    yesterday = (date.today() - relativedelta(days=1)).strftime("%Y-%m-%d")
+    #    end_date = yesterday
+    start_date = "2025-01-01"
+    end_date = "2025-12-31"
 
     data_list = [{
         "source": "hits",
