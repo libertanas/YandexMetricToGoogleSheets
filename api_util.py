@@ -33,7 +33,8 @@ def create_query(host, counter_id, token, source, start_date, end_date, api_fiel
     url = f"{host}/management/v1/counter/{counter_id}/logrequests?{urlencode(url_params)}"
 
     print("Final request URL:", url)  # для отладки, потом можно убрать
-
+    print(f"DEBUG create_query: start_date = {start_date}, end_date = {end_date}")
+    
     r = post(url, headers=header_dict)
     assert r.status_code == 200, f"Запрос не создан, {r.text}"
 
