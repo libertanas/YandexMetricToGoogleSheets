@@ -25,8 +25,11 @@ if __name__ == "__main__":
     if not start_date:
         start_date = (date.today() - relativedelta(days=2)).strftime("%Y-%m-%d")
    
-    yesterday = (date.today() - relativedelta(days=1)).strftime("%Y-%m-%d")
-    end_date = os.getenv("END_DATE", default=yesterday)
+    end_date = os.getenv("END_DATE")
+    if not end_date:
+        yesterday = (date.today() - relativedelta(days=1)).strftime("%Y-%m-%d")
+        end_date = yesterday
+    
 
     data_list = [{
         "source": "hits",
