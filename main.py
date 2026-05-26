@@ -51,16 +51,30 @@ if __name__ == "__main__":
                             end_date,
                             data_elem["api_field_list"])
         
-        if data_elem["source"] == "hits":
-            data = data[
-                #data["ym:pv:URL"].str.contains("/perekrytiya|/spasibo/|/sms", na=False)
-                data["ym:pv:URL"].str.contains("/spasibo/", na=False)
-                & (data["ym:pv:isPageView"] == 1)
-            ]
-            #data3 = data2.groupby(['ym:s:date', 'ym:s:browser'])['ym:s:clientID'].count()
-        #elif data_elem["source"] == "visits":
-        #    data = data[data["ym:s:startURL"].str.contains("/perekrytiya|/spasibo/", na=False)]
+        print("START_DATE:", start_date)
+        print("END_DATE:", end_date)
+        print("Rows downloaded:", len(data))
+        print("Columns:", data.columns.tolist())
 
+        if data_elem["source"] == "hits":
+            print("isPageView values:")
+            print(data["ym:pv:isPageView"].value_counts(dropna=False))
+
+            print("URLs sample:")
+            print(data["ym:pv:URL"].dropna().head(20).tolist())
+
+            data = data[
+                data["ym:pv:URL"].str.contains("/spasibo/", na=False)
+                & (data["ym:pv:isPageView"].astype(str) == "1")
+            ]
+        
+            print("Rows after filter:", len(data))
+            
+            if len(data) > 0:
+                print("Dates after filter:", data["ym:pv:date"].min(), data["ym:pv:date"].max())
+                print("Filtered URLs sample:")
+                print(data["ym:pv:URL"].dropna().head(20).tolist())
+        
         if len(data) > MAX_ROWS:
             data = data.tail(MAX_ROWS)
     
