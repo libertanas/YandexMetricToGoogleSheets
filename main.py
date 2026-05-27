@@ -22,11 +22,11 @@ if __name__ == "__main__":
     ]
     
     start_date = os.getenv("START_DATE")
-    if not start_date:
+    if not start_date or not start_date.strip():
         start_date = (date.today() - relativedelta(days=2)).strftime("%Y-%m-%d")
    
     end_date = os.getenv("END_DATE")
-    if not end_date:
+    if not end_date or not end_date.strip():
         yesterday = (date.today() - relativedelta(days=1)).strftime("%Y-%m-%d")
         end_date = yesterday
 
