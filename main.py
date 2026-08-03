@@ -7,7 +7,6 @@ from gspread import service_account
 from api_util import get_log_data
 from api_fields import hit_field_list, visit_field_list
 
-
 if __name__ == "__main__":
     
     token = os.getenv("TOKEN")
